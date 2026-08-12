@@ -31,7 +31,7 @@ type DealRow = RouterOutputs["deals"]["list"]["rows"][number];
 const COLUMNS: DataTableColumn<DealRow>[] = [
 	{
 		id: "name",
-		header: "Deal",
+		header: "Negócio",
 		sortable: true,
 		hideable: false,
 		width: "w-[24%]",
@@ -39,21 +39,21 @@ const COLUMNS: DataTableColumn<DealRow>[] = [
 	},
 	{
 		id: "company",
-		header: "Company",
+		header: "Empresa",
 		sortable: true,
 		width: "w-[18%]",
 		cell: (row) => <CompanyCell company={row.company} />,
 	},
 	{
 		id: "stage",
-		header: "Stage",
+		header: "Etapa",
 		sortable: true,
 		width: "w-[18%]",
 		cell: (row) => <DealStageMenu dealId={row.id} stage={row.stage} />,
 	},
 	{
 		id: "amount",
-		header: "Amount",
+		header: "Valor",
 		sortable: true,
 		align: "right",
 		width: "w-[12%]",
@@ -69,7 +69,7 @@ const COLUMNS: DataTableColumn<DealRow>[] = [
 	},
 	{
 		id: "owner",
-		header: "Owner",
+		header: "Proprietário",
 		sortable: true,
 		width: "w-[14%]",
 		hideBelow: "md",
@@ -77,7 +77,7 @@ const COLUMNS: DataTableColumn<DealRow>[] = [
 	},
 	{
 		id: "expectedCloseDate",
-		header: "Close date",
+		header: "Data de fechamento",
 		sortable: true,
 		width: "w-[12%]",
 		hideBelow: "lg",
@@ -92,8 +92,8 @@ const COLUMNS: DataTableColumn<DealRow>[] = [
 	},
 	{
 		id: "createdAt",
-		header: "Created",
-		label: "Created date",
+		header: "Criado em",
+		label: "Data de criação",
 		sortable: true,
 		align: "right",
 		width: "w-[10%]",
@@ -106,7 +106,7 @@ const COLUMNS: DataTableColumn<DealRow>[] = [
 	},
 	{
 		id: "lastActivity",
-		header: "Last activity",
+		header: "Última atividade",
 		sortable: true,
 		align: "right",
 		width: "w-[12%]",
@@ -145,7 +145,7 @@ export function DealsTable() {
 	const facets: DataTableFacet[] = [
 		{
 			id: "owner",
-			label: "Owner",
+			label: "Proprietário",
 			options: (users.data ?? []).flatMap((user) =>
 				(facetCounts?.owner?.[user.id] ?? 0) > 0
 					? [{ value: user.id, label: user.name }]
@@ -154,14 +154,14 @@ export function DealsTable() {
 		},
 		{
 			id: "stage",
-			label: "Stage",
+			label: "Etapa",
 			options: DEAL_STAGE_OPTIONS.filter(
 				(option) => (facetCounts?.stage?.[option.value] ?? 0) > 0,
 			),
 		},
 		{
 			id: "closing",
-			label: "Closing",
+			label: "Fechamento",
 			options: CLOSING_OPTIONS.flatMap((option) =>
 				(facetCounts?.closing?.[option.value] ?? 0) > 0
 					? [{ value: option.value, label: option.label }]
@@ -182,7 +182,7 @@ export function DealsTable() {
 	return (
 		<DataTable
 			query={query}
-			search={<ListSearch placeholder="Search deals by name or company…" />}
+			search={<ListSearch placeholder="Pesquisar negócios por nome ou empresa…" />}
 			columns={columns}
 			rows={rows}
 			total={deals.data?.total ?? 0}
@@ -190,10 +190,10 @@ export function DealsTable() {
 			facets={facets}
 			tabs={{
 				id: "status",
-				allLabel: "All deals",
+				allLabel: "Todos os negócios",
 				options: [
-					{ value: "open", label: "Open" },
-					{ value: "closed", label: "Closed" },
+					{ value: "open", label: "Aberto" },
+					{ value: "closed", label: "Fechado" },
 				],
 			}}
 			selection={{
@@ -207,20 +207,20 @@ export function DealsTable() {
 			loading={deals.isFetching}
 			onRowHover={(row) => prefetchRecord({ kind: "deal", id: row.id })}
 			onRowClick={(row) => openRecord({ kind: "deal", id: row.id })}
-			empty="No deals match this view."
+			empty="Nenhum negócio corresponde a esta visualização."
 			meta={
 				openPipelineCents === null ? undefined : (
 					<span>
-						{deals.data?.total ?? 0} deals ·{" "}
+						{deals.data?.total ?? 0} negócios ·{" "}
 						<span className="tabular-nums">
 							{formatMoney(openPipelineCents, reportingCurrency)}
 						</span>{" "}
-						open pipeline
+						pipeline em aberto
 						{unconverted && unconverted.count > 0 ? (
 							<span className="text-muted-foreground">
 								{" "}
-								· {unconverted.count} not counted (no{" "}
-								{unconverted.currencies.join(", ")} rate)
+								· {unconverted.count} não contado(s) (sem taxa de{" "}
+								{unconverted.currencies.join(", ")})
 							</span>
 						) : null}
 					</span>

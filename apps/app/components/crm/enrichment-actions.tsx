@@ -26,8 +26,8 @@ export function EnrichmentActions({
 				await cache.company(companyId);
 				toast.success(
 					result.queued
-						? "Looking it up — this page will update when it finishes."
-						: "Already running.",
+						? "Buscando informações — esta página vai atualizar quando terminar."
+						: "Já está em andamento.",
 				);
 			},
 			onError: (error) => toast.error(error.message),
@@ -38,7 +38,7 @@ export function EnrichmentActions({
 		trpc.companies.research.mutationOptions({
 			onSuccess: async () => {
 				await cache.activity();
-				toast.success("Brief added to the timeline.");
+				toast.success("Resumo adicionado à linha do tempo.");
 			},
 			onError: (error) => toast.error(error.message),
 		}),
@@ -57,7 +57,7 @@ export function EnrichmentActions({
 				) : (
 					<Icon icon={Renew} data-icon="inline-start" />
 				)}
-				<span className="hidden sm:inline">Re-enrich</span>
+				<span className="hidden sm:inline">Reenriquecer</span>
 			</Button>
 
 			<Button
@@ -70,7 +70,7 @@ export function EnrichmentActions({
 				) : (
 					<Icon icon={MagicWand} data-icon="inline-start" />
 				)}
-				<span className="hidden sm:inline">Research</span>
+				<span className="hidden sm:inline">Pesquisar</span>
 			</Button>
 		</>
 	);
@@ -85,7 +85,7 @@ export function ContactEnrichmentAction({ contactId }: { contactId: string }) {
 			onSuccess: async () => {
 				await cache.contact(contactId);
 				toast.success(
-					"Taking another look — this page will update when it finishes.",
+					"Analisando novamente — esta página vai atualizar quando terminar.",
 				);
 			},
 			onError: (error) => toast.error(error.message),
@@ -104,7 +104,7 @@ export function ContactEnrichmentAction({ contactId }: { contactId: string }) {
 			) : (
 				<Icon icon={Renew} data-icon="inline-start" />
 			)}
-			<span className="hidden sm:inline">Re-enrich</span>
+			<span className="hidden sm:inline">Reenriquecer</span>
 		</Button>
 	);
 }

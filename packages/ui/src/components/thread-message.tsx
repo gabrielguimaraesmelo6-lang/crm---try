@@ -59,7 +59,7 @@ function ThreadMessage({
 					</p>
 				) : (
 					<p className="text-muted-foreground text-xs italic">
-						No message body.
+						Sem conteúdo na mensagem.
 					</p>
 				)}
 

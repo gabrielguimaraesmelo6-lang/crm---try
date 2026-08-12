@@ -42,7 +42,7 @@ export function CompaniesBulkActions({
 		trpc.companies.bulkAssignOwner.mutationOptions({
 			onSuccess: async (result) => {
 				await cache.company();
-				reportBulk(result, (count) => `${companies(count)} reassigned.`);
+				reportBulk(result, (count) => `${companies(count)} reatribuída(s).`);
 				onDone();
 			},
 			onError,
@@ -55,7 +55,7 @@ export function CompaniesBulkActions({
 				await cache.company();
 				reportBulk(
 					result,
-					(count) => `Looking up ${companies(count)} — the table will update.`,
+					(count) => `Consultando ${companies(count)} — a tabela será atualizada.`,
 				);
 				onDone();
 			},
@@ -67,7 +67,7 @@ export function CompaniesBulkActions({
 		trpc.companies.bulkDelete.mutationOptions({
 			onSuccess: async (result, variables) => {
 				await cache.removedMany({ kind: "company", ids: variables.ids });
-				reportBulk(result, (count) => `${companies(count)} deleted.`);
+				reportBulk(result, (count) => `${companies(count)} excluída(s).`);
 				setConfirming(false);
 				onDone();
 			},
@@ -82,13 +82,13 @@ export function CompaniesBulkActions({
 			<BulkActionsMenu pending={pending}>
 				<BulkOwnerMenu
 					users={users.data ?? []}
-					unassignedLabel="Nobody"
+					unassignedLabel="Ninguém"
 					onSelect={(ownerId) => assignOwner.mutate({ ids, ownerId })}
 				/>
 				<DropdownMenuGroup>
 					<DropdownMenuItem onSelect={() => enrich.mutate({ ids })}>
 						<Renew />
-						Re-enrich
+						Reenriquecer
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
@@ -98,7 +98,7 @@ export function CompaniesBulkActions({
 						onSelect={() => setConfirming(true)}
 					>
 						<TrashCan />
-						Delete
+						Excluir
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</BulkActionsMenu>
@@ -106,8 +106,8 @@ export function CompaniesBulkActions({
 			<BulkDeleteDialog
 				open={confirming}
 				onOpenChange={setConfirming}
-				title={`Delete ${companies(ids.length)}?`}
-				description="Their contacts stay, with no company. Deals on these companies go with them, and none of it can be undone."
+				title={`Excluir ${companies(ids.length)}?`}
+				description="Os contatos delas permanecem, sem empresa. Os negócios dessas empresas são excluídos junto, e nada disso pode ser desfeito."
 				onConfirm={() => remove.mutate({ ids })}
 			/>
 		</>

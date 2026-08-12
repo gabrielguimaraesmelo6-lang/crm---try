@@ -79,7 +79,7 @@ export function AgentModel() {
 		trpc.settings.setAgentModel.mutationOptions({
 			onSuccess: async () => {
 				await cache.settings();
-				toast.success("The agent will use this model from its next session.");
+				toast.success("O agente usará este modelo a partir da próxima sessão.");
 			},
 			onError: (error) => toast.error(error.message),
 		}),
@@ -98,7 +98,7 @@ export function AgentModel() {
 
 	const currentLabel = selectedId
 		? effectiveName
-		: `Default — ${effectiveName}`;
+		: `Padrão — ${effectiveName}`;
 
 	const choose = (id: string) => {
 		setOpen(false);
@@ -109,9 +109,9 @@ export function AgentModel() {
 	return (
 		<Card>
 			<CardHeader>
-				<CardTitle>Research agent</CardTitle>
+				<CardTitle>Agente de pesquisa</CardTitle>
 				<CardDescription>
-					The model the agent thinks with, routed through the Vercel AI Gateway.
+					O modelo com o qual o agente pensa, roteado pelo Vercel AI Gateway.
 				</CardDescription>
 			</CardHeader>
 
@@ -122,7 +122,7 @@ export function AgentModel() {
 							variant="outline"
 							role="combobox"
 							aria-expanded={open}
-							aria-label="Model"
+							aria-label="Modelo"
 							disabled={save.isPending || catalog.isPending || unavailable}
 						>
 							{currentLabel}
@@ -132,9 +132,9 @@ export function AgentModel() {
 
 					<PopoverContent align="start" size="fit" className="w-96">
 						<Command>
-							<CommandInput placeholder="Search models…" />
+							<CommandInput placeholder="Pesquisar modelos…" />
 							<CommandList>
-								<CommandEmpty>No model matches that.</CommandEmpty>
+								<CommandEmpty>Nenhum modelo corresponde.</CommandEmpty>
 
 								<CommandGroup>
 									<CommandItem
@@ -142,7 +142,7 @@ export function AgentModel() {
 										data-checked={current === FOLLOW_DEFAULT}
 										onSelect={() => choose(FOLLOW_DEFAULT)}
 									>
-										Default — {defaultModel?.name ?? defaultId}
+										Padrão — {defaultModel?.name ?? defaultId}
 									</CommandItem>
 								</CommandGroup>
 
@@ -174,7 +174,7 @@ export function AgentModel() {
 
 				<p className="text-muted-foreground text-xs">
 					{unavailable
-						? `Could not reach the AI Gateway to list models. The agent is still running ${effectiveId}.`
+						? `Não foi possível acessar o AI Gateway para listar os modelos. O agente ainda está rodando ${effectiveId}.`
 						: effective
 							? `${effectiveId} · ${contextHint(effective.contextWindowTokens)}${
 									priceHint(effective) ? ` · ${priceHint(effective)}` : ""

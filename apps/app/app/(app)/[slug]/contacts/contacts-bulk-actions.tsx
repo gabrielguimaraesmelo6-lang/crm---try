@@ -47,7 +47,7 @@ export function ContactsBulkActions({
 		trpc.contacts.bulkAssignOwner.mutationOptions({
 			onSuccess: async (result) => {
 				await cache.contact();
-				reportBulk(result, (count) => `${contacts(count)} reassigned.`);
+				reportBulk(result, (count) => `${contacts(count)} reatribuído(s).`);
 				onDone();
 			},
 			onError,
@@ -58,7 +58,7 @@ export function ContactsBulkActions({
 		trpc.contacts.bulkSetCompany.mutationOptions({
 			onSuccess: async (result) => {
 				await cache.contact();
-				reportBulk(result, (count) => `${contacts(count)} moved.`);
+				reportBulk(result, (count) => `${contacts(count)} movido(s).`);
 				onDone();
 			},
 			onError,
@@ -71,7 +71,7 @@ export function ContactsBulkActions({
 				await cache.contact();
 				reportBulk(
 					result,
-					(count) => `Looking up ${contacts(count)} — the table will update.`,
+					(count) => `Consultando ${contacts(count)} — a tabela será atualizada.`,
 				);
 				onDone();
 			},
@@ -83,7 +83,7 @@ export function ContactsBulkActions({
 		trpc.contacts.bulkDelete.mutationOptions({
 			onSuccess: async (result, variables) => {
 				await cache.removedMany({ kind: "contact", ids: variables.ids });
-				reportBulk(result, (count) => `${contacts(count)} deleted.`);
+				reportBulk(result, (count) => `${contacts(count)} excluído(s).`);
 				setConfirming(false);
 				onDone();
 			},
@@ -102,20 +102,20 @@ export function ContactsBulkActions({
 			<BulkActionsMenu pending={pending}>
 				<BulkOwnerMenu
 					users={users.data ?? []}
-					unassignedLabel="Nobody"
+					unassignedLabel="Ninguém"
 					onSelect={(ownerId) => assignOwner.mutate({ ids, ownerId })}
 				/>
 				<DropdownMenuSub>
-					<DropdownMenuSubTrigger>Move to company</DropdownMenuSubTrigger>
+					<DropdownMenuSubTrigger>Mover para empresa</DropdownMenuSubTrigger>
 					<DropdownMenuSubContent className="max-h-72 overflow-y-auto">
 						<DropdownMenuGroup>
 							<DropdownMenuItem
 								onSelect={() => setCompany.mutate({ ids, companyId: null })}
 							>
-								No company
+								Sem empresa
 							</DropdownMenuItem>
 							{companies.data?.length === 0 ? (
-								<DropdownMenuLabel>No companies yet.</DropdownMenuLabel>
+								<DropdownMenuLabel>Ainda não há empresas.</DropdownMenuLabel>
 							) : (
 								companies.data?.map((company) => (
 									<DropdownMenuItem
@@ -134,7 +134,7 @@ export function ContactsBulkActions({
 				<DropdownMenuGroup>
 					<DropdownMenuItem onSelect={() => enrich.mutate({ ids })}>
 						<Renew />
-						Re-enrich
+						Reenriquecer
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
@@ -144,7 +144,7 @@ export function ContactsBulkActions({
 						onSelect={() => setConfirming(true)}
 					>
 						<TrashCan />
-						Delete
+						Excluir
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</BulkActionsMenu>
@@ -152,8 +152,8 @@ export function ContactsBulkActions({
 			<BulkDeleteDialog
 				open={confirming}
 				onOpenChange={setConfirming}
-				title={`Delete ${contacts(ids.length)}?`}
-				description="Their email addresses are suppressed, so the inbox sync will not file them again. This cannot be undone."
+				title={`Excluir ${contacts(ids.length)}?`}
+				description="Os endereços de e-mail deles são suprimidos, então a sincronização da caixa de entrada não vai arquivá-los novamente. Isso não pode ser desfeito."
 				onConfirm={() => remove.mutate({ ids })}
 			/>
 		</>
