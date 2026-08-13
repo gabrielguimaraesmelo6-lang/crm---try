@@ -6,12 +6,12 @@ import { BentoCard, CardHeading } from "./bento-card";
 import { SendArrow } from "./send-arrow";
 
 const QUESTIONS = [
-	"What do they do?",
-	"Who do we know here?",
-	"What has changed recently?",
+	"O que eles fazem?",
+	"Quem conhecemos aqui?",
+	"O que mudou recentemente?",
 ];
 
-const PLACEHOLDER = "What do they sell?";
+const PLACEHOLDER = "O que eles vendem?";
 
 /**
  * The one card a reader can actually drive: picking a question loads it into
@@ -24,13 +24,13 @@ export function AskCard() {
 	return (
 		<BentoCard className="grow gap-6">
 			<CardHeading
-				title="Ask any record a question"
-				body="It reads their site and our own history with them, and shows its working."
+				title="Pergunte algo sobre qualquer registro"
+				body="Ele lê o site deles e nosso histórico com eles, e mostra como chegou à resposta."
 			/>
 
 			<div className="flex grow flex-col justify-end gap-2.5">
 				<p className="select-none font-medium text-[#5A5A5A] text-[11px]/4">
-					SUGGESTED
+					SUGERIDO
 				</p>
 				{QUESTIONS.map((question) => (
 					<button

@@ -49,8 +49,8 @@ export function SlackPeopleMatches({
 		<div className="flex flex-col gap-4 px-(--spacing-block-inline)">
 			<div className="flex items-center justify-center gap-3">
 				<p className="font-medium text-xs">
-					{rows.filter((row) => row.match?.slackUserId).length} of {rows.length}{" "}
-					matched
+					{rows.filter((row) => row.match?.slackUserId).length} de {rows.length}{" "}
+					correspondidos
 				</p>
 				<Button
 					variant="outline"
@@ -59,19 +59,19 @@ export function SlackPeopleMatches({
 					onClick={() => refresh.mutate()}
 				>
 					{refreshing ? <Spinner data-icon="inline-start" /> : null}
-					{refreshing ? "Refreshing…" : "Refresh from Slack"}
+					{refreshing ? "Atualizando…" : "Atualizar do Slack"}
 				</Button>
 			</div>
 			{matches.data.sync === "stalled" ? (
 				<p className="text-center text-warning text-xs">
-					Comp AI is not reading Slack right now. These matches can be out of
-					date.
+					A Comp AI não está lendo o Slack no momento. Essas correspondências
+					podem estar desatualizadas.
 				</p>
 			) : null}
 			<div className="flex flex-col divide-y border-y">
 				{rows.length === 0 ? (
 					<p className="py-5 text-center text-muted-foreground text-sm">
-						No CRM teammates are available to match.
+						Não há colegas de CRM disponíveis para relacionar.
 					</p>
 				) : null}
 				{rows.map((row) => (
@@ -92,7 +92,7 @@ export function SlackPeopleMatches({
 								</div>
 							) : (
 								<p className="px-2.5 py-2 text-muted-foreground text-xs">
-									No exact email match
+									Nenhuma correspondência exata de e-mail
 								</p>
 							)}
 						</div>
@@ -100,13 +100,14 @@ export function SlackPeopleMatches({
 				))}
 			</div>
 			<p className="text-muted-foreground text-xs leading-relaxed">
-				Refresh after a Slack email changes. The CRM matches exact email
-				addresses only. Someone with no exact match stays unmatched, and an
-				agent stops instead of guessing at a similar name.
+				Atualize após uma alteração no e-mail do Slack. O CRM relaciona
+				apenas endereços de e-mail exatos. Alguém sem correspondência exata
+				fica sem relação, e um agente para em vez de adivinhar por um nome
+				parecido.
 			</p>
 			<div className="flex justify-end">
 				<Button asChild>
-					<Link href={`/${slug}/settings/connections/slack`}>Continue</Link>
+					<Link href={`/${slug}/settings/connections/slack`}>Continuar</Link>
 				</Button>
 			</div>
 		</div>

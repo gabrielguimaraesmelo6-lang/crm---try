@@ -36,7 +36,7 @@ type CompanyRow = RouterOutputs["companies"]["list"]["rows"][number];
 const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	{
 		id: "name",
-		header: "Company",
+		header: "Empresa",
 		sortable: true,
 		hideable: false,
 		width: "w-[26%]",
@@ -55,7 +55,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "domain",
-		header: "Domain",
+		header: "Domínio",
 		sortable: true,
 		width: "w-[16%]",
 		hideBelow: "md",
@@ -68,7 +68,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "industry",
-		header: "Industry",
+		header: "Setor",
 		sortable: true,
 		width: "w-[16%]",
 		hideBelow: "lg",
@@ -81,7 +81,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "owner",
-		header: "Owner",
+		header: "Proprietário",
 		sortable: true,
 		width: "w-[16%]",
 		hideBelow: "md",
@@ -89,7 +89,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "contacts",
-		header: "Contacts",
+		header: "Contatos",
 		sortable: true,
 		align: "right",
 		width: "w-[9%]",
@@ -98,7 +98,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "deals",
-		header: "Open deals",
+		header: "Negócios em aberto",
 		sortable: true,
 		align: "right",
 		width: "w-[9%]",
@@ -106,8 +106,8 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "createdAt",
-		header: "Created",
-		label: "Created date",
+		header: "Criado em",
+		label: "Data de criação",
 		sortable: true,
 		align: "right",
 		width: "w-[10%]",
@@ -120,7 +120,7 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "lastActivity",
-		header: "Last activity",
+		header: "Última atividade",
 		sortable: true,
 		align: "right",
 		width: "w-[12%]",
@@ -137,8 +137,8 @@ const COLUMNS: DataTableColumn<CompanyRow>[] = [
 	},
 	{
 		id: "enrichment",
-		header: "Enrichment",
-		label: "Enrichment status",
+		header: "Enriquecimento",
+		label: "Status de enriquecimento",
 		defaultHidden: true,
 		width: "w-[14%]",
 		cell: (row) => (
@@ -175,9 +175,9 @@ export function CompaniesTable() {
 	const facets: DataTableFacet[] = [
 		{
 			id: "owner",
-			label: "Owner",
+			label: "Proprietário",
 			options: [
-				{ value: "unassigned", label: "Unassigned" },
+				{ value: "unassigned", label: "Sem atribuição" },
 				...(users.data ?? []).map((user) => ({
 					value: user.id,
 					label: user.name,
@@ -186,14 +186,14 @@ export function CompaniesTable() {
 		},
 		{
 			id: "industry",
-			label: "Industry",
+			label: "Setor",
 			options: Object.keys(facetCounts?.industry ?? {})
 				.sort()
 				.map((value) => ({ value, label: value })),
 		},
 		{
 			id: "enrichment",
-			label: "Enrichment",
+			label: "Enriquecimento",
 			options: ENRICHMENT_FACET_OPTIONS.filter(
 				(option) => (facetCounts?.enrichment?.[option.value] ?? 0) > 0,
 			),
@@ -206,7 +206,7 @@ export function CompaniesTable() {
 	return (
 		<DataTable
 			query={query}
-			search={<ListSearch placeholder="Search companies by name or domain…" />}
+			search={<ListSearch placeholder="Pesquisar empresas por nome ou domínio…" />}
 			columns={columns}
 			rows={rows}
 			total={companies.data?.total ?? 0}
@@ -223,7 +223,7 @@ export function CompaniesTable() {
 			loading={companies.isFetching}
 			onRowHover={(row) => prefetchRecord({ kind: "company", id: row.id })}
 			onRowClick={(row) => openRecord({ kind: "company", id: row.id })}
-			empty="No companies match this view."
+			empty="Nenhuma empresa corresponde a esta visualização."
 		/>
 	);
 }

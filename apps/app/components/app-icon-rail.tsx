@@ -39,7 +39,7 @@ type RailItem = {
 };
 
 const ITEMS: RailItem[] = [
-	{ title: "Overview", href: "/", icon: Dashboard, match: "exact" },
+	{ title: "Visão geral", href: "/", icon: Dashboard, match: "exact" },
 	{
 		title: "Chat",
 		href: "/chat",
@@ -47,15 +47,15 @@ const ITEMS: RailItem[] = [
 		match: "prefix",
 		related: ["/agents"],
 	},
-	{ title: "Companies", href: "/companies", icon: Building, match: "prefix" },
+	{ title: "Empresas", href: "/companies", icon: Building, match: "prefix" },
 	{
-		title: "Contacts",
+		title: "Contatos",
 		href: "/contacts",
 		icon: UserMultiple,
 		match: "prefix",
 	},
-	{ title: "Deals", href: "/deals", icon: Partnership, match: "prefix" },
-	{ title: "Settings", href: "/settings", icon: Settings, match: "prefix" },
+	{ title: "Negócios", href: "/deals", icon: Partnership, match: "prefix" },
+	{ title: "Configurações", href: "/settings", icon: Settings, match: "prefix" },
 ];
 
 function isActive(item: RailItem, pathname: string): boolean {
@@ -185,7 +185,7 @@ function MobileRailIconLink({
 export function AppIconRailFallback() {
 	return (
 		<nav
-			aria-label="Primary"
+			aria-label="Principal"
 			aria-busy="true"
 			className="hidden w-14 shrink-0 flex-col items-center gap-1 border-r py-3 md:flex [view-transition-name:app-rail]"
 		>
@@ -228,7 +228,7 @@ export function AppIconRail() {
 	return (
 		<>
 			<nav
-				aria-label="Primary"
+				aria-label="Principal"
 				className="hidden w-14 shrink-0 flex-col items-center gap-1 border-r py-3 md:flex [view-transition-name:app-rail]"
 			>
 				{items.map((item) => (
@@ -249,16 +249,16 @@ export function AppIconRail() {
 						className="w-5/6 max-w-sm flex-row gap-0 p-0"
 					>
 						<SheetHeader className="sr-only">
-							<SheetTitle>Navigation and agent chats</SheetTitle>
+							<SheetTitle>Navegação e conversas com agentes</SheetTitle>
 						</SheetHeader>
 						<nav
-							aria-label="Primary"
+							aria-label="Principal"
 							className="flex w-14 shrink-0 flex-col items-center gap-1 border-r py-3"
 						>
 							<Button
 								variant="ghost"
 								size="icon"
-								aria-label="Close navigation"
+								aria-label="Fechar navegação"
 								onClick={() => setOpen(false)}
 							>
 								<Icon icon={Close} />
@@ -282,10 +282,10 @@ export function AppIconRail() {
 				) : (
 					<SheetContent side="left" className="w-64 gap-0 p-0">
 						<SheetHeader>
-							<SheetTitle>Navigation</SheetTitle>
+							<SheetTitle>Navegação</SheetTitle>
 						</SheetHeader>
 						<nav
-							aria-label="Primary"
+							aria-label="Principal"
 							className="flex flex-1 flex-col gap-1 p-2"
 						>
 							{items.map((item) => (

@@ -35,9 +35,9 @@ export function AddConnectionDialog({
 		>
 			<DialogContent className="max-w-(--container-narrow) gap-0 p-0 md:left-[calc(50%+calc((56px+213px)/2))]">
 				<DialogHeader className="gap-2 px-(--spacing-block-inline) pt-5 pb-4">
-					<DialogTitle className="text-base">Add a connection</DialogTitle>
+					<DialogTitle className="text-base">Adicionar uma conexão</DialogTitle>
 					<DialogDescription>
-						Nothing moves until you finish setting one up.
+						Nada é movido até você terminar de configurar uma.
 					</DialogDescription>
 				</DialogHeader>
 				<div className="flex flex-col border-y px-2 py-2">
@@ -45,7 +45,7 @@ export function AddConnectionDialog({
 						<CatalogRow
 							logo={GoogleLogo}
 							name="Google Workspace"
-							description="Bring in Gmail messages and Google Calendar meetings"
+							description="Traga mensagens do Gmail e reuniões do Google Agenda"
 							href={`/${slug}/settings/connections/google`}
 						/>
 					) : null}
@@ -53,7 +53,7 @@ export function AddConnectionDialog({
 						<CatalogRow
 							logo={SlackLogo}
 							name="Slack"
-							description="Let deployed agents notify approved channels and people"
+							description="Deixe agentes implantados notificarem canais e pessoas aprovados"
 							href={`/${slug}/settings/connections/slack`}
 						/>
 					) : null}
@@ -61,31 +61,31 @@ export function AddConnectionDialog({
 						<CatalogRow
 							logo={MicrosoftLogo}
 							name="Microsoft 365"
-							description="Bring in Outlook email and the people on it"
+							description="Traga e-mails do Outlook e as pessoas neles"
 							href={`/${slug}/settings/connections/microsoft`}
 						/>
 					) : null}
 					<CatalogRow
 						logo={StripeLogo}
 						name="Stripe"
-						description="Coming soon"
+						description="Em breve"
 					/>
 					<CatalogRow
 						logo={DocusignLogo}
 						name="Docusign"
-						description="Coming soon"
+						description="Em breve"
 					/>
 					<CatalogRow
 						logo={Plug}
-						name="Anything else"
-						description="The intake API is not available yet"
+						name="Outra coisa"
+						description="A API de entrada ainda não está disponível"
 						href={`/${slug}/settings/connections/intake`}
 					/>
 				</div>
 				<p className="px-(--spacing-block-inline) py-4 text-muted-foreground text-xs">
 					{connected.length > 0
-						? `${connected.join(", ")} ${connected.length === 1 ? "is" : "are"} already connected.`
-						: "Nothing is connected yet."}
+						? `${connected.join(", ")} já ${connected.length === 1 ? "está" : "estão"} conectado(a)(s).`
+						: "Nada está conectado ainda."}
 				</p>
 			</DialogContent>
 		</Dialog>

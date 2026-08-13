@@ -47,7 +47,7 @@ export function MeetingEntry({
 			<span className="text-muted-foreground text-xs">
 				{isAllDay ? (
 					<>
-						<LocalDateTime date={startsAt} options={DAY_OPTIONS} /> · All day
+						<LocalDateTime date={startsAt} options={DAY_OPTIONS} /> · Dia inteiro
 					</>
 				) : (
 					<LocalDateTimeRange
@@ -69,7 +69,7 @@ export function MeetingEntry({
 					rel="noreferrer"
 					className="text-muted-foreground text-xs underline underline-offset-3 hover:text-foreground"
 				>
-					Join call
+					Entrar na chamada
 				</a>
 			) : null}
 		</div>

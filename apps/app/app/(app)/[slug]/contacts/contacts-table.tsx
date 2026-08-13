@@ -29,7 +29,7 @@ type ContactRow = RouterOutputs["contacts"]["list"]["rows"][number];
 const COLUMNS: DataTableColumn<ContactRow>[] = [
 	{
 		id: "name",
-		header: "Name",
+		header: "Nome",
 		sortable: true,
 		hideable: false,
 		width: "w-[22%]",
@@ -47,7 +47,7 @@ const COLUMNS: DataTableColumn<ContactRow>[] = [
 	},
 	{
 		id: "title",
-		header: "Title",
+		header: "Cargo",
 		sortable: true,
 		width: "w-[20%]",
 		hideBelow: "lg",
@@ -60,7 +60,7 @@ const COLUMNS: DataTableColumn<ContactRow>[] = [
 	},
 	{
 		id: "email",
-		header: "Email",
+		header: "E-mail",
 		sortable: true,
 		width: "w-[24%]",
 		hideBelow: "md",
@@ -73,14 +73,14 @@ const COLUMNS: DataTableColumn<ContactRow>[] = [
 	},
 	{
 		id: "company",
-		header: "Company",
+		header: "Empresa",
 		sortable: true,
 		width: "w-[18%]",
 		cell: (row) => <CompanyCell company={row.company} />,
 	},
 	{
 		id: "owner",
-		header: "Owner",
+		header: "Proprietário",
 		sortable: true,
 		width: "w-[16%]",
 		hideBelow: "md",
@@ -88,8 +88,8 @@ const COLUMNS: DataTableColumn<ContactRow>[] = [
 	},
 	{
 		id: "createdAt",
-		header: "Created",
-		label: "Created date",
+		header: "Criado em",
+		label: "Data de criação",
 		sortable: true,
 		align: "right",
 		width: "w-[10%]",
@@ -102,7 +102,7 @@ const COLUMNS: DataTableColumn<ContactRow>[] = [
 	},
 	{
 		id: "lastActivity",
-		header: "Last activity",
+		header: "Última atividade",
 		sortable: true,
 		align: "right",
 		width: "w-[12%]",
@@ -142,9 +142,9 @@ export function ContactsTable() {
 	const facets: DataTableFacet[] = [
 		{
 			id: "owner",
-			label: "Owner",
+			label: "Proprietário",
 			options: [
-				{ value: "unassigned", label: "Unassigned" },
+				{ value: "unassigned", label: "Sem atribuição" },
 				...(users.data ?? []).map((user) => ({
 					value: user.id,
 					label: user.name,
@@ -153,9 +153,9 @@ export function ContactsTable() {
 		},
 		{
 			id: "company",
-			label: "Company",
+			label: "Empresa",
 			options: [
-				{ value: "none", label: "No company" },
+				{ value: "none", label: "Sem empresa" },
 				...(companies.data ?? []).map((company) => ({
 					value: company.id,
 					label: company.name,
@@ -170,7 +170,7 @@ export function ContactsTable() {
 	return (
 		<DataTable
 			query={query}
-			search={<ListSearch placeholder="Search by name, email or company…" />}
+			search={<ListSearch placeholder="Pesquisar por nome, e-mail ou empresa…" />}
 			columns={columns}
 			rows={rows}
 			total={contacts.data?.total ?? 0}
@@ -187,7 +187,7 @@ export function ContactsTable() {
 			loading={contacts.isFetching}
 			onRowHover={(row) => prefetchRecord({ kind: "contact", id: row.id })}
 			onRowClick={(row) => openRecord({ kind: "contact", id: row.id })}
-			empty="No contacts match this view."
+			empty="Nenhum contato corresponde a esta visualização."
 		/>
 	);
 }

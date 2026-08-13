@@ -26,18 +26,18 @@ import { useTRPC } from "@/lib/trpc/client";
 const TOGGLES = [
 	{
 		flag: "cookieSubdomains",
-		label: "Limit cookies to subdomains",
-		hint: "Set the cookie on the exact host that served the page, never on the parent domain",
+		label: "Limitar cookies a subdomínios",
+		hint: "Define o cookie exatamente no host que serviu a página, nunca no domínio pai",
 	},
 	{
 		flag: "secureCookies",
-		label: "Use secure cookies only",
-		hint: "Send the cookie over HTTPS and drop it on plain HTTP",
+		label: "Usar apenas cookies seguros",
+		hint: "Envia o cookie via HTTPS e o descarta em HTTP simples",
 	},
 	{
 		flag: "honourDnt",
-		label: "Honour Do Not Track",
-		hint: "Record nothing at all when the browser asks not to be tracked",
+		label: "Respeitar Não Rastrear",
+		hint: "Não registra nada quando o navegador pede para não ser rastreado",
 	},
 ] as const;
 
@@ -59,7 +59,7 @@ export function TrackingCookies() {
 		trpc.tracking.setCookieLifetime.mutationOptions({
 			onSuccess: async () => {
 				await cache.tracking();
-				toast.success("Cookie lifetime saved.");
+				toast.success("Duração do cookie salva.");
 			},
 			onError: (error) => toast.error(error.message),
 		}),
@@ -75,7 +75,7 @@ export function TrackingCookies() {
 			<CardHeader>
 				<CardTitle>Cookies</CardTitle>
 				<CardDescription>
-					How a returning visitor is recognised.
+					Como um visitante recorrente é reconhecido.
 				</CardDescription>
 			</CardHeader>
 
@@ -107,7 +107,7 @@ export function TrackingCookies() {
 				))}
 
 				<Field>
-					<FieldLabel htmlFor={lifetimeId}>Cookie lifetime</FieldLabel>
+					<FieldLabel htmlFor={lifetimeId}>Duração do cookie</FieldLabel>
 					<Select
 						value={String(cookieDays)}
 						disabled={busy}
@@ -127,8 +127,8 @@ export function TrackingCookies() {
 						</SelectContent>
 					</Select>
 					<FieldDescription>
-						After this a returning visitor counts as somebody new. Shorten it if
-						your policy asks you to.
+						Após esse período, um visitante recorrente conta como alguém novo.
+						Diminua o prazo se sua política exigir.
 					</FieldDescription>
 				</Field>
 			</CardContent>

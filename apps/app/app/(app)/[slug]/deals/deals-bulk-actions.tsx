@@ -61,7 +61,7 @@ export function DealsBulkActions({
 		trpc.deals.bulkAssignOwner.mutationOptions({
 			onSuccess: async (result) => {
 				await cache.deal();
-				reportBulk(result, (count) => `${deals(count)} reassigned.`);
+				reportBulk(result, (count) => `${deals(count)} reatribuído(s).`);
 				onDone();
 			},
 			onError,
@@ -72,7 +72,7 @@ export function DealsBulkActions({
 		trpc.deals.bulkSetStage.mutationOptions({
 			onSuccess: async (result) => {
 				await cache.deal();
-				reportBulk(result, (count) => `${deals(count)} moved.`);
+				reportBulk(result, (count) => `${deals(count)} movido(s).`);
 				setClosing(null);
 				setReason("");
 				onDone();
@@ -85,7 +85,7 @@ export function DealsBulkActions({
 		trpc.deals.bulkDelete.mutationOptions({
 			onSuccess: async (result, variables) => {
 				await cache.removedMany({ kind: "deal", ids: variables.ids });
-				reportBulk(result, (count) => `${deals(count)} deleted.`);
+				reportBulk(result, (count) => `${deals(count)} excluído(s).`);
 				setConfirming(false);
 				onDone();
 			},
@@ -106,7 +106,7 @@ export function DealsBulkActions({
 					}
 				/>
 				<DropdownMenuSub>
-					<DropdownMenuSubTrigger>Change stage</DropdownMenuSubTrigger>
+					<DropdownMenuSubTrigger>Mudar etapa</DropdownMenuSubTrigger>
 					<DropdownMenuSubContent className="max-h-72 overflow-y-auto">
 						<DropdownMenuGroup>
 							{DEAL_STAGE_OPTIONS.map((option) => (
@@ -133,7 +133,7 @@ export function DealsBulkActions({
 						onSelect={() => setConfirming(true)}
 					>
 						<TrashCan />
-						Delete
+						Excluir
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</BulkActionsMenu>
@@ -150,12 +150,12 @@ export function DealsBulkActions({
 					<DialogHeader>
 						<DialogTitle>
 							{closing === "CLOSED_LOST"
-								? `Close ${deals(ids.length)} as lost`
-								: `Mark ${deals(ids.length)} as unqualified`}
+								? `Fechar ${deals(ids.length)} como perdido(s)`
+								: `Marcar ${deals(ids.length)} como não qualificado(s)`}
 						</DialogTitle>
 						<DialogDescription>
-							The same reason goes on every one of them, so keep it to what they
-							have in common.
+							O mesmo motivo é aplicado a todos eles, então mantenha o que
+							têm em comum.
 						</DialogDescription>
 					</DialogHeader>
 
@@ -169,12 +169,12 @@ export function DealsBulkActions({
 						}}
 					>
 						<Field>
-							<FieldLabel htmlFor={reasonId}>Reason</FieldLabel>
+							<FieldLabel htmlFor={reasonId}>Motivo</FieldLabel>
 							<Textarea
 								id={reasonId}
 								value={reason}
 								onChange={(event) => setReason(event.target.value)}
-								placeholder="Budget pulled for the quarter"
+								placeholder="Orçamento cancelado no trimestre"
 								rows={3}
 							/>
 						</Field>
@@ -187,7 +187,7 @@ export function DealsBulkActions({
 							disabled={setStage.isPending || reason.trim() === ""}
 						>
 							{setStage.isPending ? <Spinner /> : null}
-							Save
+							Salvar
 						</Button>
 						<Button
 							variant="outline"
@@ -196,7 +196,7 @@ export function DealsBulkActions({
 								setReason("");
 							}}
 						>
-							Cancel
+							Cancelar
 						</Button>
 					</DialogFooter>
 				</DialogContent>
@@ -205,8 +205,8 @@ export function DealsBulkActions({
 			<BulkDeleteDialog
 				open={confirming}
 				onOpenChange={setConfirming}
-				title={`Delete ${deals(ids.length)}?`}
-				description="Everything filed against them — activity, notes, the amounts in your pipeline — goes too. This cannot be undone."
+				title={`Excluir ${deals(ids.length)}?`}
+				description="Tudo associado a eles — atividades, notas, os valores no seu pipeline — também é excluído. Isso não pode ser desfeito."
 				onConfirm={() => remove.mutate({ ids })}
 			/>
 		</>

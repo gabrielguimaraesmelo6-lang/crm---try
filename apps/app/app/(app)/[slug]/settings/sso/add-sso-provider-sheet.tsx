@@ -48,7 +48,7 @@ function AddButton(props: ComponentProps<typeof Button>) {
 	return (
 		<Button {...props}>
 			<Icon icon={Add} data-icon="inline-start" />
-			Add provider
+			Adicionar provedor
 		</Button>
 	);
 }
@@ -84,7 +84,7 @@ function AddSsoProviderForm() {
 		trpc.sso.register.mutationOptions({
 			onSuccess: async (provider) => {
 				await cache.sso();
-				toast.success(`${provider.name} saved.`);
+				toast.success(`${provider.name} salvo.`);
 				await setOpen(null);
 				setValues(EMPTY);
 			},
@@ -111,9 +111,9 @@ function AddSsoProviderForm() {
 
 			<SheetContent side="right">
 				<SheetHeader>
-					<SheetTitle>Add an identity provider</SheetTitle>
+					<SheetTitle>Adicionar um provedor de identidade</SheetTitle>
 					<SheetDescription>
-						Configure an OpenID Connect provider.
+						Configure um provedor OpenID Connect.
 					</SheetDescription>
 				</SheetHeader>
 
@@ -133,7 +133,7 @@ function AddSsoProviderForm() {
 				>
 					<FieldGroup>
 						<Field>
-							<FieldLabel htmlFor={providerIdId}>Name</FieldLabel>
+							<FieldLabel htmlFor={providerIdId}>Nome</FieldLabel>
 							<Input
 								id={providerIdId}
 								value={values.providerId}
@@ -146,12 +146,12 @@ function AddSsoProviderForm() {
 								required
 							/>
 							<FieldDescription>
-								Names the sign-in button. Cannot be changed later.
+								Nomeia o botão de entrada. Não pode ser alterado depois.
 							</FieldDescription>
 						</Field>
 
 						<Field>
-							<FieldLabel htmlFor={issuerId}>Issuer URL</FieldLabel>
+							<FieldLabel htmlFor={issuerId}>URL do emissor</FieldLabel>
 							<Input
 								id={issuerId}
 								type="url"
@@ -165,11 +165,11 @@ function AddSsoProviderForm() {
 								inputMode="url"
 								required
 							/>
-							<FieldDescription>Where discovery lives.</FieldDescription>
+							<FieldDescription>Onde a descoberta está.</FieldDescription>
 						</Field>
 
 						<Field>
-							<FieldLabel htmlFor={domainId}>Email domain</FieldLabel>
+							<FieldLabel htmlFor={domainId}>Domínio de e-mail</FieldLabel>
 							<Input
 								id={domainId}
 								value={values.domain}
@@ -181,11 +181,11 @@ function AddSsoProviderForm() {
 								spellCheck={false}
 								required
 							/>
-							<FieldDescription>Comma-separate several.</FieldDescription>
+							<FieldDescription>Separe vários por vírgula.</FieldDescription>
 						</Field>
 
 						<Field>
-							<FieldLabel htmlFor={clientIdId}>Client ID</FieldLabel>
+							<FieldLabel htmlFor={clientIdId}>ID do cliente</FieldLabel>
 							<Input
 								id={clientIdId}
 								value={values.clientId}
@@ -199,7 +199,7 @@ function AddSsoProviderForm() {
 						</Field>
 
 						<Field>
-							<FieldLabel htmlFor={clientSecretId}>Client secret</FieldLabel>
+							<FieldLabel htmlFor={clientSecretId}>Segredo do cliente</FieldLabel>
 							<Input
 								id={clientSecretId}
 								type="password"
@@ -208,19 +208,19 @@ function AddSsoProviderForm() {
 								autoComplete="off"
 								required
 							/>
-							<FieldDescription>Never shown again.</FieldDescription>
+							<FieldDescription>Nunca mais é exibido.</FieldDescription>
 						</Field>
 
 						<Field>
-							<FieldLabel htmlFor={redirectId}>Redirect URI</FieldLabel>
+							<FieldLabel htmlFor={redirectId}>URI de redirecionamento</FieldLabel>
 							<InputGroup>
 								<InputGroupInput id={redirectId} value={callbackURL} readOnly />
 								<InputGroupAddon align="inline-end">
-									<CopyValue value={callbackURL} label="Redirect URI" />
+									<CopyValue value={callbackURL} label="URI de redirecionamento" />
 								</InputGroupAddon>
 							</InputGroup>
 							<FieldDescription>
-								Add this at your provider before saving.
+								Adicione isso no seu provedor antes de salvar.
 							</FieldDescription>
 						</Field>
 					</FieldGroup>
@@ -233,10 +233,10 @@ function AddSsoProviderForm() {
 						disabled={!complete || register.isPending}
 					>
 						{register.isPending ? <Spinner /> : null}
-						Add provider
+						Adicionar provedor
 					</Button>
 					<SheetClose asChild>
-						<Button variant="outline">Cancel</Button>
+						<Button variant="outline">Cancelar</Button>
 					</SheetClose>
 				</SheetFooter>
 			</SheetContent>

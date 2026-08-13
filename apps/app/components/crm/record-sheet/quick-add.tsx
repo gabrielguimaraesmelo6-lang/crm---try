@@ -48,7 +48,7 @@ function QuickAddForm({
 					disabled={pending}
 					onClick={onCancel}
 				>
-					Cancel
+					Cancelar
 				</Button>
 				<Button type="submit" size="sm" disabled={pending || !ready}>
 					{pending ? <Spinner /> : null}
@@ -85,7 +85,7 @@ export function QuickAddContact({
 		trpc.contacts.create.mutationOptions({
 			onSuccess: async (contact) => {
 				await cache.contact(contact.id);
-				toast.success(`${contact.firstName} added.`);
+				toast.success(`${contact.firstName} adicionado(a).`);
 				onDone();
 			},
 			onError: (error) => toast.error(error.message),
@@ -94,7 +94,7 @@ export function QuickAddContact({
 
 	return (
 		<QuickAddForm
-			submitLabel="Add contact"
+			submitLabel="Adicionar contato"
 			pending={create.isPending}
 			ready={firstName.trim() !== ""}
 			onCancel={onDone}
@@ -110,7 +110,7 @@ export function QuickAddContact({
 			}
 		>
 			<Field>
-				<FieldLabel htmlFor={firstNameId}>First name</FieldLabel>
+				<FieldLabel htmlFor={firstNameId}>Nome</FieldLabel>
 				<Input
 					id={firstNameId}
 					autoFocus
@@ -120,7 +120,7 @@ export function QuickAddContact({
 				/>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={lastNameId}>Last name</FieldLabel>
+				<FieldLabel htmlFor={lastNameId}>Sobrenome</FieldLabel>
 				<Input
 					id={lastNameId}
 					value={lastName}
@@ -129,7 +129,7 @@ export function QuickAddContact({
 				/>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={emailId}>Email</FieldLabel>
+				<FieldLabel htmlFor={emailId}>E-mail</FieldLabel>
 				<Input
 					id={emailId}
 					type="email"
@@ -139,7 +139,7 @@ export function QuickAddContact({
 				/>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={titleId}>Title</FieldLabel>
+				<FieldLabel htmlFor={titleId}>Cargo</FieldLabel>
 				<Input
 					id={titleId}
 					value={title}
@@ -182,8 +182,8 @@ export function AttachDealContact({
 				await cache.deal(dealId);
 				toast.success(
 					person
-						? `${contactName(person)} is on the deal.`
-						: "Added to the deal.",
+						? `${contactName(person)} está no negócio.`
+						: "Adicionado ao negócio.",
 				);
 				onDone();
 			},
@@ -194,14 +194,14 @@ export function AttachDealContact({
 	const nobody = !options.isPending && candidates.length === 0;
 
 	const placeholder = options.isPending
-		? "Loading…"
+		? "Carregando…"
 		: nobody
-			? `Everybody at ${companyName} is already on it`
-			: "Choose somebody";
+			? `Todo mundo da ${companyName} já está no negócio`
+			: "Escolha alguém";
 
 	return (
 		<QuickAddForm
-			submitLabel="Add to deal"
+			submitLabel="Adicionar ao negócio"
 			pending={attach.isPending}
 			ready={contactId !== ""}
 			onCancel={onDone}
@@ -210,7 +210,7 @@ export function AttachDealContact({
 			}
 		>
 			<Field>
-				<FieldLabel htmlFor={personId}>Person</FieldLabel>
+				<FieldLabel htmlFor={personId}>Pessoa</FieldLabel>
 				<Select value={contactId} onValueChange={setContactId}>
 					<SelectTrigger id={personId} className="w-full" disabled={nobody}>
 						<SelectValue placeholder={placeholder} />
@@ -226,7 +226,7 @@ export function AttachDealContact({
 				</Select>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={roleId}>Role</FieldLabel>
+				<FieldLabel htmlFor={roleId}>Função</FieldLabel>
 				<Input
 					id={roleId}
 					value={role}
@@ -268,7 +268,7 @@ export function QuickAddDeal({
 		trpc.deals.create.mutationOptions({
 			onSuccess: async (deal) => {
 				await cache.deal(deal.id);
-				toast.success(`${deal.name} created.`);
+				toast.success(`${deal.name} criado.`);
 				onDone();
 			},
 			onError: (error) => toast.error(error.message),
@@ -277,7 +277,7 @@ export function QuickAddDeal({
 
 	const submit = () => {
 		if (!owner) {
-			toast.error("Could not work out who should own this deal.");
+			toast.error("Não foi possível definir o proprietário deste negócio.");
 			return;
 		}
 
@@ -285,7 +285,7 @@ export function QuickAddDeal({
 		if (amount.trim() !== "") {
 			const parsed = Number.parseFloat(amount);
 			if (!Number.isFinite(parsed) || parsed < 0) {
-				toast.error("Amount has to be a number.");
+				toast.error("O valor precisa ser um número.");
 				return;
 			}
 			amountCents = Math.round(parsed * 100);
@@ -302,14 +302,14 @@ export function QuickAddDeal({
 
 	return (
 		<QuickAddForm
-			submitLabel="Create deal"
+			submitLabel="Criar negócio"
 			pending={create.isPending}
 			ready={name.trim() !== ""}
 			onCancel={onDone}
 			onSubmit={submit}
 		>
 			<Field className="sm:col-span-2">
-				<FieldLabel htmlFor={nameId}>Name</FieldLabel>
+				<FieldLabel htmlFor={nameId}>Nome</FieldLabel>
 				<Input
 					id={nameId}
 					autoFocus
@@ -320,7 +320,7 @@ export function QuickAddDeal({
 				/>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={amountId}>Amount</FieldLabel>
+				<FieldLabel htmlFor={amountId}>Valor</FieldLabel>
 				<Input
 					id={amountId}
 					value={amount}
@@ -330,12 +330,12 @@ export function QuickAddDeal({
 				/>
 			</Field>
 			<Field>
-				<FieldLabel htmlFor={closeId}>Expected close</FieldLabel>
+				<FieldLabel htmlFor={closeId}>Fechamento previsto</FieldLabel>
 				<DatePicker
 					id={closeId}
 					value={closeDate}
 					onChange={setCloseDate}
-					placeholder="No date yet"
+					placeholder="Sem data ainda"
 				/>
 			</Field>
 		</QuickAddForm>

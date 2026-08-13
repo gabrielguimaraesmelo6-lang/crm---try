@@ -36,22 +36,22 @@ const ENRICHMENT_ROWS = [
 ];
 
 const SUGGESTED_AGENTS = [
-	"Brief every deal owner before a renewal call",
-	"Flag deals with no activity for 14 days",
-	"Hand new customers from Sales to Onboarding",
+	"Informar cada responsável por negócio antes de uma chamada de renovação",
+	"Sinalizar negócios sem atividade há 14 dias",
+	"Passar novos clientes de Vendas para Onboarding",
 ];
 
 const FOLLOW_UPS = [
-	{ label: "Recheck Paula Marchetti", due: "14d", next: true },
-	{ label: "Brief owner before renewal", due: "2d", next: false },
-	{ label: "Re-enrich Northwind", due: "90d", next: false },
+	{ label: "Revisar Paula Marchetti", due: "14d", next: true },
+	{ label: "Informar responsável antes da renovação", due: "2d", next: false },
+	{ label: "Re-enriquecer Northwind", due: "90d", next: false },
 ];
 
 export function CapabilitiesSection() {
 	return (
 		<section className="relative flex w-full shrink-0 flex-col items-center px-6 pt-20 pb-20 md:pb-30">
 			<div className="flex w-full max-w-6xl flex-col gap-12 md:gap-[72px]">
-				<SectionHeading title="What it actually does" />
+				<SectionHeading title="O que ele realmente faz" />
 
 				<div className="flex flex-col gap-4 lg:flex-row">
 					<div className="flex min-w-0 grow flex-col gap-4">
@@ -75,8 +75,8 @@ function EnrichmentCard() {
 	return (
 		<BentoCard className="gap-6">
 			<CardHeading
-				title="Records fill themselves in"
-				body="A new person on a thread becomes a contact, and their company arrives with its logo, industry and last activity already on it."
+				title="Registros se preenchem sozinhos"
+				body="Uma nova pessoa em uma thread vira um contato, e a empresa dela chega com logo, setor e última atividade já preenchidos."
 			/>
 
 			<div className="flex select-none flex-col">
@@ -97,11 +97,11 @@ function EnrichmentCard() {
 						{row.researching ? (
 							<StatusBadge className="gap-1 bg-border text-muted-foreground">
 								<ResearchingSpinner />
-								Researching
+								Pesquisando
 							</StatusBadge>
 						) : (
 							<StatusBadge className="bg-primary text-primary-foreground">
-								Enriched
+								Enriquecido
 							</StatusBadge>
 						)}
 					</div>
@@ -114,14 +114,14 @@ function EnrichmentCard() {
 function AgentBuilderCard() {
 	return (
 		<BentoCard className="min-w-0 grow gap-5">
-			<CardTitle>Agents that build agents</CardTitle>
+			<CardTitle>Agentes que criam agentes</CardTitle>
 			<CardBody>
-				Describe a process in a sentence and the agent writes another agent to
-				run it — on its own queue, on its own schedule.
+				Descreva um processo em uma frase e o agente escreve outro agente para
+				executá-lo — na própria fila, no próprio horário.
 			</CardBody>
 
 			<div className="flex select-none flex-col">
-				<MonoLabel className="h-[26px] shrink-0">SUGGESTED AGENTS</MonoLabel>
+				<MonoLabel className="h-[26px] shrink-0">AGENTES SUGERIDOS</MonoLabel>
 				{SUGGESTED_AGENTS.map((agent) => (
 					<div
 						key={agent}
@@ -141,7 +141,7 @@ function AgentBuilderCard() {
 function FollowUpCard() {
 	return (
 		<BentoCard className="min-w-0 grow gap-5">
-			<CardTitle>It books its own follow-ups</CardTitle>
+			<CardTitle>Ele agenda seus próprios follow-ups</CardTitle>
 
 			<ul className="flex select-none flex-col gap-[14px]">
 				{FOLLOW_UPS.map((item) => (
@@ -168,10 +168,10 @@ function FollowUpCard() {
 			</ul>
 
 			<div className="flex flex-col gap-2 pt-1">
-				<MonoLabel>WHY</MonoLabel>
+				<MonoLabel>POR QUÊ</MonoLabel>
 				<p className="text-[13px]/[21px] text-muted-foreground">
-					An agent that cannot say why it will be back in fourteen days does not
-					have a reason, it has a default.
+					Um agente que não consegue dizer por que voltará em quatorze dias não
+					tem um motivo, tem um padrão.
 				</p>
 			</div>
 		</BentoCard>

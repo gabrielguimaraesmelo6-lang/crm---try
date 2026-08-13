@@ -15,7 +15,7 @@ import { getServerQueryClient, getServerTrpc } from "@/lib/trpc/server";
 import { TrackingSections } from "./tracking-sections";
 
 export const metadata: Metadata = {
-	title: "Tracking & Analytics",
+	title: "Rastreamento e Análises",
 };
 
 export default function TrackingSettingsPage() {
@@ -23,10 +23,10 @@ export default function TrackingSettingsPage() {
 		<PageShell>
 			<PageShellHeader>
 				<PageShellHeading>
-					<PageShellTitle>Tracking &amp; Analytics</PageShellTitle>
+					<PageShellTitle>Rastreamento &amp; Análises</PageShellTitle>
 					<PageShellDescription>
-						Track website visitors and automatically add contacts when a form is
-						submitted.
+						Acompanhe visitantes do site e adicione contatos automaticamente quando
+						um formulário for enviado.
 					</PageShellDescription>
 				</PageShellHeading>
 			</PageShellHeader>

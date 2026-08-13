@@ -39,9 +39,9 @@ export type Capabilities = {
 };
 
 const ACTION_LABELS: Record<string, string> = {
-	"slack.message.post": "Post a message",
-	"crm.activity.create": "Write a note or task on the record",
-	"run.summary": "Write a summary of the run",
+	"slack.message.post": "Publicar uma mensagem",
+	"crm.activity.create": "Escrever uma nota ou tarefa no registro",
+	"run.summary": "Escrever um resumo da execução",
 };
 
 export function AgentCapabilities({
@@ -79,7 +79,7 @@ export function AgentCapabilities({
 					queryKey: trpc.agents.byId.pathKey(),
 				});
 				reset();
-				toast.success("Saved. A new version is live.");
+				toast.success("Salvo. Uma nova versão está no ar.");
 			},
 			onError: (error) => toast.error(error.message),
 		}),
@@ -89,7 +89,7 @@ export function AgentCapabilities({
 		trpc.slack.joinChannel.mutationOptions({
 			onSuccess: async () => {
 				await channels.reload();
-				toast.success("Asked someone to invite Comp AI.");
+				toast.success("Pedimos que alguém convide o Comp AI.");
 			},
 			onError: (error) => toast.error(error.message),
 		}),
@@ -99,9 +99,9 @@ export function AgentCapabilities({
 		return (
 			<Alert variant="warning">
 				<Icon icon={Warning} />
-				<AlertTitle>This version's manifest cannot be read</AlertTitle>
+				<AlertTitle>O manifesto desta versão não pôde ser lido</AlertTitle>
 				<AlertDescription>
-					{capabilities.problem ?? "The manifest is not in a shape we know."}
+					{capabilities.problem ?? "O manifesto não está em um formato reconhecido."}
 				</AlertDescription>
 			</Alert>
 		);
@@ -125,9 +125,9 @@ export function AgentCapabilities({
 		shownResources.length === 0 &&
 		capabilities.dataScope?.mode !== "WORKSPACE";
 	const blocked = everyActionOff
-		? "Leave one action on. An agent that does nothing cannot be saved."
+		? "Deixe pelo menos uma ação ativada. Um agente que não faz nada não pode ser salvo."
 		: scopeEmptied
-			? "Add one record. An empty list opens every record in the workspace."
+			? "Adicione pelo menos um registro. Uma lista vazia abre todos os registros do espaço de trabalho."
 			: null;
 
 	const save = () => {
@@ -174,13 +174,13 @@ export function AgentCapabilities({
 								}}
 							>
 								<Button size="sm" variant="outline">
-									Create a channel
+									Criar um canal
 								</Button>
 							</CreateChannelDialog>
 						) : null
 					}
-					summary="One channel. Comp AI joins it when you save."
-					title="Lives in"
+					summary="Um canal. O Comp AI entra nele quando você salvar."
+					title="Fica em"
 				>
 					<ChannelPicker
 						canInviteItself={canInviteItself}
@@ -196,8 +196,8 @@ export function AgentCapabilities({
 			) : null}
 
 			<Section
-				summary="If it is off here, it cannot do it."
-				title="What it can do there"
+				summary="Se estiver desativado aqui, o agente não pode fazer isso."
+				title="O que ele pode fazer lá"
 			>
 				<div className="flex flex-col">
 					{capabilities.actions.map((action) => (
@@ -228,7 +228,7 @@ export function AgentCapabilities({
 					))}
 					{capabilities.actions.length === 0 ? (
 						<p className="text-muted-foreground text-sm">
-							Nothing outside the CRM.
+							Nada fora do CRM.
 						</p>
 					) : null}
 				</div>
@@ -236,15 +236,15 @@ export function AgentCapabilities({
 
 			<Section
 				summary={
-					capabilities.dataScope?.summary || "What it reads to do its job."
+					capabilities.dataScope?.summary || "O que ele lê para fazer o trabalho."
 				}
-				title="What it can see"
+				title="O que ele pode ver"
 			>
 				<div className="flex flex-wrap gap-2">
 					{shownResources.length === 0 &&
 					capabilities.dataScope?.mode === "WORKSPACE" ? (
 						<span className="flex h-7 items-center rounded-md border px-2.5 text-sm">
-							Every record in the workspace
+							Todos os registros do espaço de trabalho
 						</span>
 					) : null}
 
@@ -256,7 +256,7 @@ export function AgentCapabilities({
 							{resource.label}
 							{canManage ? (
 								<button
-									aria-label={`Remove ${resource.label}`}
+									aria-label={`Remover ${resource.label}`}
 									className="text-muted-foreground hover:text-foreground"
 									onClick={() =>
 										setResources(
@@ -299,16 +299,16 @@ export function AgentCapabilities({
 				description={
 					blocked ??
 					(channelChanged
-						? `Comp AI joins #${to}. It stays in #${from} until you remove it.`
-						: "The old version stays in the history.")
+						? `O Comp AI entra em #${to}. Ele permanece em #${from} até que você o remova.`
+						: "A versão antiga permanece no histórico.")
 				}
 				open={dirty}
 				title={
 					blocked
-						? "This change cannot be saved"
+						? "Esta alteração não pode ser salva"
 						: channelChanged
-							? `Moving from #${from} to #${to}`
-							: "Changing what this agent can do"
+							? `Movendo de #${from} para #${to}`
+							: "Alterando o que este agente pode fazer"
 				}
 			>
 				<Button
@@ -317,14 +317,14 @@ export function AgentCapabilities({
 					size="sm"
 					variant="outline"
 				>
-					Discard
+					Descartar
 				</Button>
 				<Button
 					disabled={revise.isPending || blocked !== null}
 					onClick={save}
 					size="sm"
 				>
-					{revise.isPending ? "Saving…" : "Save"}
+					{revise.isPending ? "Salvando…" : "Salvar"}
 				</Button>
 			</SaveBar>
 		</div>
@@ -348,7 +348,7 @@ function ResourcePicker({ onPick }: { onPick: (resource: Resource) => void }) {
 					type="button"
 				>
 					<Icon className="size-3" icon={Add} motion="none" />
-					Add a record type
+					Adicionar um tipo de registro
 				</button>
 			</PopoverTrigger>
 
@@ -356,7 +356,7 @@ function ResourcePicker({ onPick }: { onPick: (resource: Resource) => void }) {
 				<input
 					className="w-full border-b bg-transparent px-3 py-2.5 text-sm outline-none"
 					onChange={(event) => setQuery(event.target.value)}
-					placeholder="Search records and integrations"
+					placeholder="Pesquisar registros e integrações"
 					value={query}
 				/>
 				<div className="flex max-h-64 flex-col overflow-y-auto py-1">
@@ -384,7 +384,7 @@ function ResourcePicker({ onPick }: { onPick: (resource: Resource) => void }) {
 					))}
 					{(results.data ?? []).length === 0 ? (
 						<p className="px-3 py-2 text-muted-foreground text-sm">
-							Nothing matches.
+							Nada corresponde.
 						</p>
 					) : null}
 				</div>

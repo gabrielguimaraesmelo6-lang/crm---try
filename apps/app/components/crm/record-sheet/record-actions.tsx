@@ -32,9 +32,9 @@ import {
 } from "./record-stack";
 
 const NOUN: Record<RecordKind, string> = {
-	company: "company",
-	contact: "contact",
-	deal: "deal",
+	company: "empresa",
+	contact: "contato",
+	deal: "negócio",
 };
 
 function useDeleteRecord(record: RecordRef) {
@@ -45,7 +45,7 @@ function useDeleteRecord(record: RecordRef) {
 	const handlers = {
 		onSuccess: (deleted: { name: string }) => {
 			toast.success(
-				`${deleted.name || `The ${NOUN[record.kind]}`} was deleted.`,
+				`${deleted.name || `${NOUN[record.kind]}`} foi excluído(a).`,
 			);
 			void cache.removed(record);
 			close();
@@ -81,7 +81,7 @@ export function RecordActions({
 				<DropdownMenuTrigger asChild>
 					<Button variant="ghost" size="icon-sm" disabled={remove.isPending}>
 						<Icon icon={OverflowMenuVertical} />
-						<span className="sr-only">More actions</span>
+						<span className="sr-only">Mais ações</span>
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end" className="min-w-44">
@@ -90,7 +90,7 @@ export function RecordActions({
 						onSelect={() => setConfirming(true)}
 					>
 						<Icon icon={TrashCan} />
-						Delete {NOUN[record.kind]}
+						Excluir {NOUN[record.kind]}
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
@@ -98,17 +98,17 @@ export function RecordActions({
 			<AlertDialog open={confirming} onOpenChange={setConfirming}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>Delete {name}?</AlertDialogTitle>
+						<AlertDialogTitle>Excluir {name}?</AlertDialogTitle>
 						<AlertDialogDescription>{consequence}</AlertDialogDescription>
 					</AlertDialogHeader>
 
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
+						<AlertDialogCancel>Cancelar</AlertDialogCancel>
 						<AlertDialogAction
 							variant="destructive"
 							onClick={() => remove.mutate({ id: record.id })}
 						>
-							Delete
+							Excluir
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

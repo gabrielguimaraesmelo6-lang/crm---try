@@ -40,8 +40,8 @@ export function FactSuggestion({
 			onSuccess: (result) => {
 				toast.success(
 					result.applied
-						? "Added to the record."
-						: "Dismissed — it won't be suggested again.",
+						? "Adicionado ao registro."
+						: "Descartado — não será sugerido novamente.",
 				);
 				return cache.contact(contactId, { settle: "record" });
 			},
